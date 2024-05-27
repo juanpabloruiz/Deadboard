@@ -41,55 +41,72 @@
       </footer>
 
       <script>
-    async function updateVisitCount() {
-      const user = 'juanpabloruiz'; // Tu nombre de usuario de GitHub
-      const repo = 'Deadboard'; // El nombre de tu repositorio
-      const path = 'counter.txt'; // La ruta al archivo dentro del repositorio
-      const token = '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'; // Tu token de acceso personal de GitHub
-
-      // Obtener el contenido del archivo counter.txt en el repositorio
-      const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}`, {
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      });
-      if (!response.ok) {
-        console.error('Error al obtener el archivo:', response.statusText);
-        return;
-      }
-      const data = await response.json();
-      const content = atob(data.content);
-      let count = parseInt(content);
-
-      // Incrementar el contador
-      count++;
-
-      // Mostrar el contador en la página
-      document.getElementById('visit-count').innerText = `Visitas: ${count}`;
-
-      // Codificar el nuevo contador en base64
-      const encodedContent = btoa(count.toString());
-
-      // Escribir el nuevo contador en el archivo counter.txt en el repositorio
-      await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}`, {
-        method: 'PUT',
-        headers: {
-          Authorization: `token ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: 'Actualizar contador de visitas',
-          content: encodedContent,
-          sha: data.sha,
-        }),
-      });
-    }
-
-    // Llamar a la función updateVisitCount() al cargar la página
-    window.onload = function() {
-      updateVisitCount();
-    };
-  </script>
+        async function updateVisitCount() {
+          const user = 'juanpabloruiz'; // Tu nombre de usuario de GitHub
+          const repo = 'Deadboard'; // El nombre de tu repositorio
+          const path = 'counter.txt'; // La ruta al archivo dentro del repositorio
+          const token = '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'; // Tu token de acceso personal de GitHub
+    
+          try {
+            // Obtener el contenido del archivo counter.txt en el repositorio
+            const response = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}`, {
+              headers: {
+                Authorization: `token ${token}`,
+              },
+            });
+    
+            if (!response.ok) {
+              throw new Error(`Error al obtener el archivo: ${response.statusText}`);
+            }
+    
+            const data = await response.json();
+            console.log('Datos del archivo:', data);
+            
+            const content = atob(data.content);
+            console.log('Contenido actual:', content);
+            
+            let count = parseInt(content);
+    
+            // Incrementar el contador
+            count++;
+            console.log('Nuevo contador:', count);
+    
+            // Mostrar el contador en la página
+            document.getElementById('visit-count').innerText = `Visitas: ${count}`;
+    
+            // Codificar el nuevo contador en base64
+            const encodedContent = btoa(count.toString());
+            console.log('Contenido codificado:', encodedContent);
+    
+            // Escribir el nuevo contador en el archivo counter.txt en el repositorio
+            const updateResponse = await fetch(`https://api.github.com/repos/${user}/${repo}/contents/${path}`, {
+              method: 'PUT',
+              headers: {
+                Authorization: `token ${token}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                message: 'Actualizar contador de visitas',
+                content: encodedContent,
+                sha: data.sha,
+              }),
+            });
+    
+            if (!updateResponse.ok) {
+              throw new Error(`Error al actualizar el archivo: ${updateResponse.statusText}`);
+            }
+    
+            console.log('Archivo actualizado exitosamente');
+          } catch (error) {
+            console.error('Ocurrió un error:', error);
+          }
+        }
+    
+        // Llamar a la función updateVisitCount() al cargar la página
+        window.onload = function() {
+          updateVisitCount();
+        };
+      </script>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="script.js"></script>
