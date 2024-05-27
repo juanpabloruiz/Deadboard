@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("progressBar").style.width = progress + "%";
   }
 
-  // Función para calcular y mostrar el contador de cuenta regresiva en días
+  // Función para calcular y mostrar el contador de cuenta regresiva en segundos
   function updateCountdown() {
     // Fecha de nacimiento
     var birthDate = new Date("1980-06-19");
@@ -38,11 +38,14 @@ document.addEventListener("DOMContentLoaded", function() {
     // Diferencia en milisegundos
     var difference = futureDate - currentDate;
     
-    // Convertir milisegundos a días
-    var totalDays = Math.floor(difference / (1000 * 60 * 60 * 24));
+    // Convertir milisegundos a segundos
+    var totalSeconds = Math.floor(difference / 1000);
 
-    // Mostrar el contador de cuenta regresiva solo en días
-    document.getElementById("countdown").innerHTML = "<h5>Días restantes hasta los 100 años:</h5><h4>Solo te quedan " + totalDays + " días.</h4>";
+    // Formatear los segundos con puntos
+    var formattedSeconds = totalSeconds.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+    // Mostrar el contador de cuenta regresiva solo en segundos
+    document.getElementById("countdown").innerHTML = "<h5>Te quedan:</h5><h4>" + formattedSeconds + " segundos.</h4>";
   }
 
   // Actualizar el progreso y el contador cada segundo
