@@ -48,12 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("countdown").innerHTML = "<h5>Me quedan:</h5><h4>" + formattedSeconds + " segundos.</h4>";
   }
 
-  function updateVisitCounter() {
-    var visitCount = localStorage.getItem('visitCount') || 0;
-    visitCount++;
-    localStorage.setItem('visitCount', visitCount);
-    document.getElementById('visitCounter').innerText = visitCount;
-  }
+  
 
   // Actualizar el progreso y el contador cada segundo
   setInterval(function() {
@@ -64,5 +59,5 @@ document.addEventListener("DOMContentLoaded", function() {
   // Actualizar la barra de progreso y el contador al cargar la página
   updateProgressBar();
   updateCountdown();
-  updateVisitCounter();
+
 });
