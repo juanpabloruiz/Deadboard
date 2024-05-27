@@ -1,57 +1,21 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
-}
+    
 
-.container {
-    text-align: center;
-}
-
-#calendar {
-    display: grid;
-    grid-template-columns: repeat(52, 10px);
-    gap: 2px;
-    margin-top: 20px;
-}
-
-.cell {
-    width: 10px;
-    height: 10px;
-    background-color: #ccc;
-}
-
-.cell.filled {
-    background-color: #3498db;
-}
-
-#countdown {
-    margin-top: 20px;
-    font-size: 1.2em;
-    color: #333;
-}
-
-#goals {
-    margin-top: 30px;
-}
-
-#goalList {
-    list-style-type: none;
-    padding: 0;
-}
-
-#goalList li {
-    background: #fff;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ddd;
-}
-
-.strikethrough {
-    text-decoration: line-through;
-}
+ 
+  }
+  
+  .progress-container {
+    width: 50%;
+    background-color: #f80000; 
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    width: 0%;
+    height: 30px;
+    background-color: #4caf50;
+    transition: width 0.5s ease-in-out;
+  }
+  

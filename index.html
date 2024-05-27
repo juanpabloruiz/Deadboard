@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deadboard</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barra de Progreso de Vida</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Deadboard: Mi Vida en Días</h1>
-        <input type="date" id="birthdate" placeholder="Ingresa tu fecha de nacimiento">
-        <button onclick="generateCalendar()">Generar Calendario</button>
-        <div id="calendar"></div>
-        <div id="countdown"></div>
-        <h2>Metas de Vida</h2>
-        <div id="goals">
-            <input type="text" id="goalInput" placeholder="Ingresa una meta">
-            <button onclick="addGoal()">Añadir Meta</button>
-            <ul id="goalList"></ul>
-        </div>
-    </div>
-    <script src="script.js"></script>
+    <div class="profile-picture">
+        <img src="https://www.gravatar.com/avatar/9356459e6204f54bea0afb1292a0651b?s=100" alt="Mi Foto de Perfil">
+      </div>
+<div class="progress-container">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+<hr>
+<div id="countdown"></div>
+<script src="script.js"></script>
 </body>
 </html>

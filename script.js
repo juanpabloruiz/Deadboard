@@ -1,100 +1,63 @@
-function generateCalendar() {
-    const birthdate = document.getElementById('birthdate').value;
-    if (!birthdate) {
-        alert("Por favor, ingresa tu fecha de nacimiento");
-        return;
+document.addEventListener("DOMContentLoaded", function() {
+    // Función para calcular el progreso y actualizar la barra de progreso
+    function updateProgressBar() {
+      // Fecha de nacimiento
+      var birthDate = new Date("1980-06-19");
+      
+      // Fecha actual
+      var currentDate = new Date();
+      
+      // Diferencia en milisegundos
+      var difference = currentDate - birthDate;
+      
+      // Convertir milisegundos a días
+      var daysAlive = Math.floor(difference / (1000 * 60 * 60 * 24));
+      
+      // Total de días aproximado en una vida
+      var totalDays = 365.25 * 100;
+      
+      // Calcular el progreso
+      var progress = (daysAlive / totalDays) * 100;
+      
+      // Actualizar la barra de progreso
+      document.getElementById("progressBar").style.width = progress + "%";
     }
-
-    const birthDate = new Date(birthdate);
-    const today = new Date();
-    const oneDay = 24 * 60 * 60 * 1000;
-    const daysLived = Math.floor((today - birthDate) / oneDay);
-    const totalDays = 80 * 365; // Asumiendo 80 años de vida
-
-    const calendar = document.getElementById('calendar');
-    calendar.innerHTML = '';
-
-    for (let i = 0; i < totalDays; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        if (i < daysLived) {
-            cell.classList.add('filled');
-        }
-        calendar.appendChild(cell);
+  
+    // Función para calcular y mostrar el contador de cuenta regresiva
+    function updateCountdown() {
+      // Fecha de nacimiento
+      var birthDate = new Date("1980-06-19");
+      
+      // Fecha actual
+      var currentDate = new Date();
+      
+      // Diferencia en milisegundos
+      var difference = birthDate.getTime() - currentDate.getTime();
+      
+      // Convertir milisegundos a segundos
+      var totalSeconds = Math.abs(Math.floor(difference / 1000));
+  
+      // Calcular años, meses, semanas, días, horas, minutos y segundos restantes
+      var years = Math.floor(totalSeconds / (365 * 24 * 60 * 60));
+      var months = Math.floor((totalSeconds % (365 * 24 * 60 * 60)) / (30 * 24 * 60 * 60));
+      var weeks = Math.floor((totalSeconds % (30 * 24 * 60 * 60)) / (7 * 24 * 60 * 60));
+      var days = Math.floor((totalSeconds % (7 * 24 * 60 * 60)) / (24 * 60 * 60));
+      var hours = Math.floor((totalSeconds % (24 * 60 * 60)) / (60 * 60));
+      var minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+      var seconds = totalSeconds % 60;
+  
+      // Mostrar el contador de cuenta regresiva
+      document.getElementById("countdown").innerHTML = "Tiempo restante hasta los 100 años:<br> " + years + " años, " + months + " meses, " + weeks + " semanas, " + days + " días, " + hours + " horas, " + minutes + " minutos, " + seconds + " segundos.";
     }
-
+  
+    // Actualizar el progreso y el contador cada segundo
+    setInterval(function() {
+      updateProgressBar();
+      updateCountdown();
+    }, 1000);
+  
+    // Actualizar la barra de progreso y el contador al cargar la página
+    updateProgressBar();
     updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
-
-function updateCountdown() {
-    const birthdate = document.getElementById('birthdate').value;
-    if (!birthdate) return;
-
-    const birthDate = new Date(birthdate);
-    const today = new Date();
-    const totalLifeTime = 80 * 365 * 24 * 60 * 60 * 1000; // 80 años en milisegundos
-    const timeLived = today - birthDate;
-    const timeLeft = totalLifeTime - timeLived;
-
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    document.getElementById('countdown').innerHTML = 
-        `Tiempo restante: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-}
-
-function loadGoals() {
-    const goals = JSON.parse(localStorage.getItem('goals')) || [];
-    const goalList = document.getElementById('goalList');
-    goalList.innerHTML = '';
-    goals.forEach(goal => {
-        const goalItem = document.createElement('li');
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = goal.completed;
-        checkbox.onchange = function() {
-            goal.completed = checkbox.checked;
-            saveGoals(goals);
-            renderGoals();
-        };
-
-        goalItem.appendChild(checkbox);
-
-        const goalText = document.createElement('span');
-        goalText.textContent = goal.text;
-        if (goal.completed) {
-            goalText.classList.add('strikethrough');
-        }
-
-        goalItem.appendChild(goalText);
-        goalList.appendChild(goalItem);
-    });
-}
-
-function addGoal() {
-    const goalInput = document.getElementById('goalInput');
-    const goalText = goalInput.value.trim();
-    if (!goalText) return;
-
-    const goals = JSON.parse(localStorage.getItem('goals')) || [];
-    goals.push({ text: goalText, completed: false });
-    saveGoals(goals);
-    renderGoals();
-
-    goalInput.value = '';
-}
-
-function saveGoals(goals) {
-    localStorage.setItem('goals', JSON.stringify(goals));
-}
-
-function renderGoals() {
-    loadGoals();
-}
-
-// Load goals on page load
-document.addEventListener('DOMContentLoaded', loadGoals);
+  });
+  
