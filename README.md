@@ -29,4 +29,4 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 ## Demo
 
-Puedes ver una demostración de la aplicación en [GitHub Pages](https://juanpabloruiz.github.io/deadboard/).
+Puedes ver una demostración de la aplicación en [GitHub Pages](https://juanpabloruiz.github.io/Deadboard/).
