@@ -36,10 +36,45 @@
     </main>
 
     <footer>
-        <!-- hitwebcounter Code START -->
-<a href="https://www.hitwebcounter.com" target="_blank">
-    <img src="https://hitwebcounter.com/counter/counter.php?page=13677867&style=0006&nbdigits=9&type=ip&initCount=0" title="Counter Widget" Alt="Visit counter For Websites" ></a>    
+        <p id="visit-count">Cargando contador...</p>
       </footer>
+
+      <script>
+        // Función para obtener y actualizar el contador de visitas
+        async function updateVisitCount() {
+          // Obtener el contenido del archivo visit-count.txt en el repositorio
+          const response = await fetch('https://api.github.com/repos/TU_USUARIO/TU_REPOSITORIO/contents/visit-count.txt');
+          const data = await response.json();
+          const content = atob(data.content);
+          let count = parseInt(content);
+    
+          // Incrementar el contador
+          count++;
+    
+          // Mostrar el contador en la página
+          document.getElementById('visit-count').innerText = `Visitas: ${count}`;
+    
+          // Escribir el nuevo contador en el archivo visit-count.txt en el repositorio
+          const encodedContent = btoa(count.toString());
+          await fetch('https://api.github.com/repos/juanpabloruiz/Deadboard/contents/visit-count.txt', {
+            method: 'PUT',
+            headers: {
+              Authorization: 'token TU_TOKEN_DE_ACCESO',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              message: 'Actualizar contador de visitas',
+              content: encodedContent,
+              sha: data.sha,
+            }),
+          });
+        }
+    
+        // Llamar a la función updateVisitCount() al cargar la página
+        window.onload = function() {
+          updateVisitCount();
+        };
+      </script>
 
     <script src="js/bootstrap.min.js"></script>
     <script src="script.js"></script>
