@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var daysAlive = Math.floor(difference / (1000 * 60 * 60 * 24));
     
     // Total de días aproximado en una vida
-    var totalDays = 365.25 * 100;
+    var totalDays = 365.25 * 70;
     
     // Calcular el progreso
     var progress = (daysAlive / totalDays) * 100;
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var formattedSeconds = totalSeconds.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     // Mostrar el contador de cuenta regresiva solo en segundos
-    document.getElementById("countdown").innerHTML = "<h5>Te quedan:</h5><h4>" + formattedSeconds + " segundos.</h4>";
+    document.getElementById("countdown").innerHTML = "<h5>Me quedan:</h5><h4>" + formattedSeconds + " segundos.</h4>";
   }
 
   // Actualizar el progreso y el contador cada segundo
