@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var formattedDays = totalDays.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
     // Mostrar el contador de cuenta regresiva solo en días
-    document.getElementById("countdown").innerHTML = "<h5>Me quedan:</h5><h4>" + formattedDays + " días.</h4>";
+    document.getElementById("countdown").innerHTML = "<h5>Me quedan " + formattedDays + " días de vida.</h5>";
   }
 
   // Actualizar el progreso y el contador cada segundo
